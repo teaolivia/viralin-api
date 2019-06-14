@@ -1,0 +1,121 @@
+{
+    "Items": [
+        {
+            "day_of_birth": {
+                "S": "1967-09-27"
+            },
+            "city": {
+                "S": "Bandung"
+            },
+            "password": {
+                "S": "b'$2b$12$u7ZY30DoTB3R6cr5fyw9EOhQYLa7deOU4I8/j8neG9NX03MhTSTmu'"
+            },
+            "level": {
+                "S": "S"
+            },
+            "promotor_id": {
+                "S": "promotor3"
+            },
+            "province": {
+                "S": "Jawa Barat"
+            },
+            "place_of_birth": {
+                "S": "Vancouver"
+            },
+            "username": {
+                "S": "sandycheeks"
+            },
+            "address": {
+                "S": "Ir. H. Djuanda No. 48"
+            },
+            "email": {
+                "S": "sandy_cheeks@gmail.com"
+            },
+            "phone": {
+                "S": "+6281111111113"
+            },
+            "name": {
+                "S": "Sandy Cheeks"
+            }
+        },
+        {
+            "day_of_birth": {
+                "S": "1989-12-24"
+            },
+            "city": {
+                "S": "Surabaya"
+            },
+            "password": {
+                "S": "b'$2b$12$EdEUFw4Abs.PFB7t1DTapuws7qmYzYR26qtJ9FXUP9vkIG0kuKzAa'"
+            },
+            "level": {
+                "S": "A"
+            },
+            "promotor_id": {
+                "S": "promotor2"
+            },
+            "province": {
+                "S": "Jawa Timur"
+            },
+            "place_of_birth": {
+                "S": "Kuala Lumpur"
+            },
+            "username": {
+                "S": "flyingdutchman"
+            },
+            "address": {
+                "S": "VOC 2 No. 67"
+            },
+            "email": {
+                "S": "flying_dutchman@gmail.com"
+            },
+            "phone": {
+                "S": "+6281111111112"
+            },
+            "name": {
+                "S": "Flying Dutchman"
+            }
+        },
+        {
+            "day_of_birth": {
+                "S": "1995-05-23"
+            },
+            "city": {
+                "S": "Jakarta Pusat"
+            },
+            "password": {
+                "S": "b'$2b$12$pJFlhFrIXEg2jkpQVTVCD.Ns1d1t3qgCe6hYBLbo24WhmI5PUfQfu'"
+            },
+            "level": {
+                "S": "B"
+            },
+            "promotor_id": {
+                "S": "promotor1"
+            },
+            "province": {
+                "S": "DKI Jakarta"
+            },
+            "username": {
+                "S": "spongebob"
+            },
+            "place_of_birth": {
+                "S": "Bikini Bottom"
+            },
+            "address": {
+                "S": "Bikini Bottom 1 No. 43"
+            },
+            "email": {
+                "S": "spongebob_squarepants@gmail.com"
+            },
+            "phone": {
+                "S": "+6281111111111"
+            },
+            "name": {
+                "S": "SpongeBob SquarePants"
+            }
+        }
+    ],
+    "Count": 3,
+    "ScannedCount": 3,
+    "ConsumedCapacity": null
+}

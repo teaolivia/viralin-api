@@ -1,0 +1,16 @@
+dist: xenial
+language: python
+python:
+  - "3.7"
+  - "3.7-dev"  # 3.6 development branch
+# command to install dependencies
+install:
+  pip3 install -r requirements.txt
+# command to run tests
+script:
+  pytest
+# virtualenv dependencies
+virtualenv:
+  system_site_packages: true
+# disable sudo for faster build
+sudo : false

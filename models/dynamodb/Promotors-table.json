@@ -1,0 +1,25 @@
+{
+    "TableName": "PromotorsTable",
+    "KeySchema": [
+      { "AttributeName": "PromotorID", "KeyType": "HASH" }
+    ],
+    "AttributeDefinitions": [
+        { "AttributeName": "SellerID", "AttributeType": "S" },
+        { "AttributeName": "Username", "AttributeType": "S" },
+        { "AttributeName": "Password", "AttributeType": "S" },
+        { "AttributeName": "Name", "AttributeType": "S" },
+        { "AttributeName": "Email", "AttributeType": "S" },
+        { "AttributeName": "Phone", "AttributeType": "S" },
+        { "AttributeName": "place_of_birth", "AttributeType": "S" },
+        { "AttributeName": "day_of_birth", "AttributeType": "S" },
+        { "AttributeName": "place_of_birth", "AttributeType": "S" },
+        { "AttributeName": "address", "AttributeType": "S" },
+        { "AttributeName": "city", "AttributeType": "S" },
+        { "AttributeName": "province", "AttributeType": "S" },
+        { "AttributeName": "Level", "AttributeType": "S" }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 10
+    }
+}

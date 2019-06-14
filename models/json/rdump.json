@@ -1,0 +1,22 @@
+[
+    {
+        "content_id": "1",
+        "promotor_id": "234"
+    },
+    {
+        "content_id": "2",
+        "promotor_id": "234"
+    },
+    {
+        "content_id": "3",
+        "promotor_id": "567"
+    },
+    {
+        "content_id": "4",
+        "promotor_id": "890"
+    },
+    {
+        "content_id": "5",
+        "promotor_id": "567"
+    }
+]

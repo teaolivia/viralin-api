@@ -1,0 +1,59 @@
+{
+    "Items": [
+        {
+            "business_name": {
+                "S": "Chum Bucket"
+            },
+            "password": {
+                "S": "b'$2b$12$X5yVhtnNFZp.e9GGxd.lvOKDiZOS//iS8kaeE/NJD1H1u9jsfu6tW'"
+            },
+            "seller_id": {
+                "S": "seller2"
+            },
+            "business_type": {
+                "S": "Barang"
+            },
+            "username": {
+                "S": "karen"
+            },
+            "email": {
+                "S": "chum_bucket@mail.com"
+            },
+            "phone": {
+                "S": "+6281234567891"
+            },
+            "name": {
+                "S": "Plankton"
+            }
+        },
+        {
+            "business_name": {
+                "S": "Krusty Krabs"
+            },
+            "password": {
+                "S": "b'$2b$12$dpNrEp7X2Ci1LznrGGZuw.paBMsskHFniJW/jBll8Vj26trYwizPu'"
+            },
+            "seller_id": {
+                "S": "seller1"
+            },
+            "business_type": {
+                "S": "Makanan"
+            },
+            "username": {
+                "S": "co-ching"
+            },
+            "email": {
+                "S": "krusty_krabs@mail.com"
+            },
+            "phone": {
+                "S": "+6281234567890"
+            },
+            "name": {
+                "S": "Eugene Krabs"
+            }
+        }
+    ],
+    "Count": 2,
+    "ScannedCount": 2,
+    "ConsumedCapacity": null
+}

@@ -1,0 +1,62 @@
+{
+    "Items": [
+        {
+            "_id": {
+                "S": "2"
+            },
+            "promotor_id": {
+                "S": "promotor3"
+            },
+            "content_id": {
+                "S": "content4"
+            }
+        },
+        {
+            "_id": {
+                "S": "1"
+            },
+            "promotor_id": {
+                "S": "promotor1"
+            },
+            "content_id": {
+                "S": "content1"
+            }
+        },
+        {
+            "_id": {
+                "S": "5"
+            },
+            "promotor_id": {
+                "S": "promotor2"
+            },
+            "content_id": {
+                "S": "content3"
+            }
+        },
+        {
+            "_id": {
+                "S": "4"
+            },
+            "promotor_id": {
+                "S": "promotor1"
+            },
+            "content_id": {
+                "S": "content2"
+            }
+        },
+        {
+            "_id": {
+                "S": "3"
+            },
+            "promotor_id": {
+                "S": "promotor2"
+            },
+            "content_id": {
+                "S": "content5"
+            }
+        }
+    ],
+    "Count": 5,
+    "ScannedCount": 5,
+    "ConsumedCapacity": null
+}

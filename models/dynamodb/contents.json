@@ -1,0 +1,182 @@
+{
+    "Items": [
+        {
+            "isReferral": {
+                "BOOL": false
+            },
+            "seller_id": {
+                "S": "seller2"
+            },
+            "content_type": {
+                "S": "barang"
+            },
+            "status": {
+                "BOOL": false
+            },
+            "games_rule": {
+                "S": "Personal Information posting is a crime"
+            },
+            "duration_end": {
+                "S": "2019-01-01"
+            },
+            "duration_start": {
+                "S": "2019-02-01"
+            },
+            "content_id": {
+                "S": "content3"
+            },
+            "asset": {
+                "N": "6666"
+            },
+            "title": {
+                "S": "Buy 1 Get 1"
+            },
+            "type": {
+                "S": "fisik"
+            }
+        },
+        {
+            "isReferral": {
+                "BOOL": false
+            },
+            "seller_id": {
+                "S": "seller2"
+            },
+            "content_type": {
+                "S": "barang"
+            },
+            "status": {
+                "BOOL": false
+            },
+            "games_rule": {
+                "S": "makin lama makin asyik!!!"
+            },
+            "duration_end": {
+                "S": "2019-04-01"
+            },
+            "duration_start": {
+                "S": "2019-08-01"
+            },
+            "content_id": {
+                "S": "content4"
+            },
+            "asset": {
+                "N": "88888"
+            },
+            "title": {
+                "S": "Diskon 50%"
+            },
+            "type": {
+                "S": "fisik"
+            }
+        },
+        {
+            "isReferral": {
+                "BOOL": true
+            },
+            "seller_id": {
+                "S": "seller1"
+            },
+            "content_type": {
+                "S": "kuota"
+            },
+            "status": {
+                "BOOL": true
+            },
+            "games_rule": {
+                "S": "Spotlight uh, Moonlight uh, X got shot at a stoplight uh"
+            },
+            "duration_end": {
+                "S": "2019-02-01"
+            },
+            "content_id": {
+                "S": "content1"
+            },
+            "duration_start": {
+                "S": "2019-01-01"
+            },
+            "asset": {
+                "N": "999999"
+            },
+            "type": {
+                "S": "digital"
+            },
+            "title": {
+                "S": "Indihome Paket Gamer"
+            }
+        },
+        {
+            "isReferral": {
+                "BOOL": true
+            },
+            "seller_id": {
+                "S": "seller1"
+            },
+            "content_type": {
+                "S": "makanan"
+            },
+            "status": {
+                "BOOL": true
+            },
+            "games_rule": {
+                "S": "Ayam Geprek super pedas enak mantap gurih!!!"
+            },
+            "duration_end": {
+                "S": "2019-03-20"
+            },
+            "duration_start": {
+                "S": "2019-03-02"
+            },
+            "content_id": {
+                "S": "content2"
+            },
+            "asset": {
+                "N": "55555"
+            },
+            "title": {
+                "S": "Ayam Geprek Hot"
+            },
+            "type": {
+                "S": "fisik"
+            }
+        },
+        {
+            "isReferral": {
+                "BOOL": true
+            },
+            "seller_id": {
+                "S": "seller1"
+            },
+            "content_type": {
+                "S": "barang"
+            },
+            "status": {
+                "BOOL": true
+            },
+            "games_rule": {
+                "S": "Transfer pulsa bawa berkah <3"
+            },
+            "duration_end": {
+                "S": "2019-06-05"
+            },
+            "duration_start": {
+                "S": "2019-07-05"
+            },
+            "content_id": {
+                "S": "content5"
+            },
+            "asset": {
+                "N": "88888"
+            },
+            "title": {
+                "S": "Pu(l)asa"
+            },
+            "type": {
+                "S": "digital"
+            }
+        }
+    ],
+    "Count": 5,
+    "ScannedCount": 5,
+    "ConsumedCapacity": null
+}

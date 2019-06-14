@@ -1,0 +1,22 @@
+{
+    "TableName": "ContentsTable",
+    "KeySchema": [
+      { "AttributeName": "ContentID", "KeyType": "HASH" },
+      { "AttributeName": "SellerID", "KeyType": "RANGE" }
+    ],
+    "AttributeDefinitions": [
+        { "AttributeName": "Title", "AttributeType": "S" },
+        { "AttributeName": "Status", "AttributeType": "S" },
+        { "AttributeName": "IsReferral", "AttributeType": "S" },
+        { "AttributeName": "ContentType", "AttributeType": "S" },
+        { "AttributeName": "DurationStart", "AttributeType": "S" },
+        { "AttributeName": "DurationEnd", "AttributeType": "S" },
+        { "AttributeName": "FormType", "AttributeType": "S" },
+        { "AttributeName": "Asset", "AttributeType": "N" },
+        { "AttributeName": "GamesRule", "AttributeType": "S" }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 10
+    }
+}

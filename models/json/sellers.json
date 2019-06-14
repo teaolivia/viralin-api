@@ -1,0 +1,22 @@
+[
+    {
+        "_id": "1234",
+        "username": "co-ching",
+        "password": "moneymoneymoney",
+        "name": "Eugene Krabs",
+        "business_name": "Krusty Krabs",
+        "email": "krusty_krabs@mail.com",
+        "phone": "+6281234567890",
+        "business_type": "makanan dan minuman"
+    },
+    {
+        "_id": "5678",
+        "username": "betterthankrabypatty",
+        "password": "krabypattysucks",
+        "name": "Chum Bucket",
+        "business_name": "Plankton",
+        "email": "chum_bucket@mail.com",
+        "phone": "+628765432109",
+        "business_type": "souvenir"
+    }
+]

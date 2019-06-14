@@ -1,0 +1,44 @@
+[
+    {
+        "_id": "234",
+        "username": "spongebob",
+        "password": "imagination",
+        "name": "SpongeBob SquarePants",
+        "email": "spongebob_squarepants@gmail.com",
+        "phone": "+6281111111111",
+        "place_of_birth": "Bikini Bottom",
+        "day_of_birth": "05/05/1995",
+        "address": "Bikini Bottom 1 No. 43",
+        "city": "Jakarta Pusat",
+        "province": "DKI Jakarta",
+        "level": "B"
+    },
+    {
+        "_id": "567",
+        "username": "flyingdutchman",
+        "password": "iwamboyouwambo",
+        "name": "Flying Dutchman",
+        "email": "flying_dutchman@gmail.com",
+        "phone": "+6281111111112",
+        "place_of_birth": "Kuala Lumpur",
+        "day_of_birth": "04/12/1989",
+        "address": "VOC 2 No. 67",
+        "city": "Surabaya",
+        "province": "Jawa Timur",
+        "level": "A"
+    },
+    {
+        "_id": "890",
+        "username": "karatechop",
+        "password": "ismayonnaiseaninstrument",
+        "name": "Sandy Cheeks",
+        "email": "sandy_cheeks@gmail.com",
+        "phone": "+6281111111113",
+        "place_of_birth": "Vancouver",
+        "day_of_birth": "27/09/1967",
+        "address": "Ir. H. Djuanda No. 48",
+        "city": "Bandung",
+        "province": "Jawa Barat",
+        "level": "S"
+    }
+]
