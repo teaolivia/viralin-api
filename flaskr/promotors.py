@@ -1,6 +1,6 @@
 #!flask/bin/python
 from flaskr.user import User
-from flaskr import apis, db, login, promotors
+from flaskr import apis, login, promotors
 from flask import Flask, jsonify, make_response
 import json
 import requests

@@ -1,6 +1,7 @@
 from models import models
 from flask import request, make_response, jsonify
-from flaskr import apis, sellers
+from flaskr import apis, sellers, auth
+
 
 @apis.route('/')
 def henlo():

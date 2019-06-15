@@ -4,16 +4,18 @@ from flask import Flask, Blueprint, request
 from flask_cors import CORS
 from flask_dynamo import Dynamo
 from flask_jwt_extended import JWTManager, create_access_token
-from pymongo import MongoClient
+#from pymongo import MongoClient
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
+from flask_httpauth import HTTPBasicAuth
 import boto3
 
 apis = Flask(__name__)
+auth = HTTPBasicAuth()
 
 ## pymongo Config
-client = MongoClient('mongodb://localhost:27017/')
-db = client.viralinDB
+# client = MongoClient('mongodb://localhost:27017/')
+# db = client.viralinDB
 
 ## flask_dynamo
 dynamo = Dynamo(apis)
@@ -22,7 +24,7 @@ dynamo = Dynamo(apis)
 # client
 dbsession = boto3.Session(profile_name='admin-db')
 dynamo_client = dbsession.client('dynamodb')
-# resource
+# # resource
 dynamo_resource = dbsession.resource('dynamodb')
 sellers = dynamo_resource.Table('sellers')
 promotors = dynamo_resource.Table('promotors')

@@ -1,6 +1,7 @@
-from flaskr import apis, db, login, bcrypt
+from flaskr import apis, login, bcrypt, auth
 from flask import Flask, session, request, abort, make_response
 from models import models
+
 
 class User(object):
     def __init__(self, username, password):

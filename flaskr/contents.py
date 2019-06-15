@@ -1,6 +1,6 @@
 #!flask/bin/python
 from flask import Flask, jsonify, request, abort, make_response, url_for
-from flaskr import apis, login, db, dynamo
+from flaskr import apis, login, dynamo
 from models import models
 import json
 import requests
@@ -35,7 +35,7 @@ class Contents(object):
         
     @apis.route('/<seller_id>/contents', methods=['DELETE'])
     def delete_content(self, seller_id, content_id, promo_id):
-        db.Contents.deleteOne( { "seller_id": seller_id, "_id": content_id } )
+        #db.Contents.deleteOne( { "seller_id": seller_id, "_id": content_id } )
         # delete in dynamoDB
         contents.delete_item(Key = {'content_id': content_id})
         contentpromo.delete_item(Key = {'content_id': content_id, 'promo_id': promo_id})
@@ -58,11 +58,11 @@ class Contents(object):
         self.duration_end = end
         return self.duration_end - self.duration_start
 
-    @apis.route('/contents/<content_id>/share', methods=['POST'])
+    @apis.route('/contents/<string:content_id>/share', methods=['POST'])
     def share_link(self, content_id) -> str:
         return url_for('/<seller_id>/<content_id>')
 
-    @apis.route('/contents/<content_id>/<promotor_id>', methods=['POST'])
+    @apis.route('/contents/<string:content_id>/<string:promotor_id>', methods=['POST'])
     def respond_request(self, content_id, promotor_id):
         pass
     

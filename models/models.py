@@ -5,6 +5,14 @@ from models import dbsession, kwargs_processor
 from models.dynamo_client import DynamoDBClient
 from models.dynamodb import DynamoDB
 
+from flask_login import UserMixin
+
+# class User(UserMixin, db.Model):
+#     @login.user_loader
+#     def load_user(id):
+#         return User.query.get(int(id))
+
+
 def get_dynamodb_resource():
     dynamodb = dbsession.resource("dynamodb", region_name="ap-southeast-1")
     """ :type : pyboto3.dynamodb """

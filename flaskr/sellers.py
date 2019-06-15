@@ -3,7 +3,7 @@ from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
 )
-from flaskr import apis, login, db, dynamo, sellers, promotors, contents
+from flaskr import apis, login, dynamo, sellers, promotors, contents
 from flask import Flask, Blueprint, jsonify, request, abort, make_response
 from flaskr.user import User
 from bson.objectid import ObjectId
@@ -16,7 +16,7 @@ class Sellers(User):
         User.__init__(self, username, password)
         self.seller_id = id
 
-    @apis.route('/sellers/login', methods=['GET','POST'])
+    @apis.route('/sellers/login', methods=['POST'])
     def login():
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
@@ -31,7 +31,7 @@ class Sellers(User):
         access_token = create_access_token(identity=username)
         return jsonify(access_token=access_token), 200
 
-    @apis.route('/sellers/register', methods=['GET','POST'])
+    @apis.route('/sellers/register/', methods=['GET','POST'])
     def sign_up():
         business_name = request.form.get('namaUsaha', None)
         business_type = request.form.get('jenisUsaha', None)
@@ -59,7 +59,8 @@ class Sellers(User):
     # basic getter route
     @apis.route('/sellers/<seller_id>/n_promotors', methods=['GET'])
     def count_total_promotors(self, seller_id):
-        return db.Promotors.count_documents({"seller_id": seller_id})
+        #return db.Promotors.count_documents({"seller_id": seller_id})
+        pass
 
     @apis.route('/sellers', methods=['GET'])
     def get_sellers():
@@ -121,14 +122,15 @@ class Sellers(User):
         # return db.promotors.find({"seller_id": seller_id}).count()
         pass
 
-    @apis.route('/sellers/<seller_id>/stats', methods=['GET'])
+    @apis.route('/sellers/<string:seller_id>/stats/', methods=['GET'])
     def view_stats(seller_id):
         response = sellers.get_item(
             Key={
                 'seller_id': seller_id
             }
         )
-        return jsonify({'results': response['Item']['sellers_value']})
+        item = response['Item'].decode('utf-8')
+        return item
 
 # # main driver
 # if __name__ == '__main__':
