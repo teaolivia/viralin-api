@@ -1,5 +1,6 @@
 from flaskr import apis, login, bcrypt, auth
 from flask import Flask, session, request, abort, make_response
+from flask_cognito import cognito_auth_required, current_user, current_cognito_jwt
 from models import models
 
 
@@ -49,6 +50,20 @@ class User(object):
     # uploading profile picture
     def upload_profile_picture(self, id):
         pass
+
+
+    """ 
+        AWS Cognito configuration
+    """
+    @route('/api/private')
+    @cognito_auth_required
+    def api_private():
+        # user must have valid cognito access or ID token in header
+        # (accessToken is recommended - not as much personal information contained inside as with idToken)
+        return jsonify({
+            'cognito_username': current_cognito_jwt['username'],   # from cognito pool
+            'user_id': current_user.id,   # from your database
+        })
 
 ## Flask-JWT Config
 # apis.debug = True
