@@ -9,6 +9,7 @@ from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_httpauth import HTTPBasicAuth
 import boto3
+from boto3.dynamodb.conditions import Key, Attr
 
 apis = Flask(__name__)
 auth = HTTPBasicAuth()
@@ -45,27 +46,5 @@ bcrypt = Bcrypt(apis)
 
 ## Flask-CORS Config
 CORS(apis)
-
-## Flask-Cognito Config
-# configuration
-apis.config.extend({
-    'COGNITO_REGION': 'ap-southeast-1,
-    'COGNITO_USERPOOL_ID': 'ap-southeast-1',
-
-    # optional
-    'COGNITO_APP_CLIENT_ID': '256a3d3ett1nsfrasp0r4vrsk8',  # client ID you wish to verify user is authenticated against
-    'COGNITO_CHECK_TOKEN_EXPIRATION': False,  # disable token expiration checking for testing purposes
-    'COGNITO_JWT_HEADER_NAME': 'X-MyApp-Authorization',
-    'COGNITO_JWT_HEADER_PREFIX': 'Bearer',
-})
-
-
-# initialize extension
-cogauth = CognitoAuth(app)
-
-@cogauth.identity_handler
-def lookup_cognito_user(payload):
-    """Look up user in our database from Cognito JWT payload."""
-    return User.query.filter(User.cognito_username == payload['username']).one_or_none()
 
 from flaskr import routes, user, sellers, promotors, contents

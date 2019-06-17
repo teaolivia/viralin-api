@@ -3,7 +3,7 @@ from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
 )
-from flaskr import apis, login, dynamo, sellers, promotors, contents
+from flaskr import apis, login, dynamo, sellers, promotors, contents, decimalencoder
 from flask import Flask, Blueprint, jsonify, request, abort, make_response
 from flaskr.user import User
 from bson.objectid import ObjectId
@@ -49,7 +49,6 @@ class Sellers(User):
             'email' : request.json['email'],
             'password' : request.json['password'],
             'business_name': request.json['business_name'],
-            
         }
         sellers.put_item(obj)
 
@@ -62,14 +61,17 @@ class Sellers(User):
         #return db.Promotors.count_documents({"seller_id": seller_id})
         pass
 
-    @apis.route('/sellers', methods=['GET'])
-    def get_sellers():
-        response = sellers.get_item(
-            Key={
-                'seller_id': seller_id
-                }
-            )
-        return jsonify({'results': response['Item']['sellers_value']})
+    @apis.route('/sellers/<seller_id>', methods=['GET'])
+    def get_sellers(seller_id):
+        result = table.query(
+            KeyConditionExpression=Key('username').eq(seller_id)
+        )
+        response = {
+            "statusCode": 200,
+            "body": json.dumps(result['Items'],
+                            cls=decimalencoder.DecimalEncoder)
+        }
+        return response
         # seller_documents = [doc for doc in db.Sellers.find({})]
         # return jsonify({'sellers': seller_documents})
 

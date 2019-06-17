@@ -1,6 +1,6 @@
 #!flask/bin/python
 from flask import Flask, jsonify, request, abort, make_response, url_for
-from flaskr import apis, login, dynamo
+from flaskr import apis, login, dynamo, decimalencoder
 from models import models
 import json
 import requests

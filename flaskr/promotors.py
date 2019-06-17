@@ -1,7 +1,11 @@
 #!flask/bin/python
 from flaskr.user import User
-from flaskr import apis, login, promotors
-from flask import Flask, jsonify, make_response
+from flaskr import apis, login, promotors, decimalencoder
+from flask import Flask, jsonify, request, make_response
+from flask_jwt_extended import (
+    JWTManager, jwt_required, create_access_token,
+    get_jwt_identity
+)
 import json
 import requests
 

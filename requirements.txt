@@ -3,3 +3,10 @@ flask
 zappa
 pytest
 boto3
+bson
+flask_jwt_extended
+flask_dynamo
+flask_cors
+flask_bcrypt
+flask_httpauth
+flask_login

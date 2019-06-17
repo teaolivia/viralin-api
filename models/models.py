@@ -1,6 +1,4 @@
-import decimal
-import json
-
+from flaskr import decimalencoder
 from models import dbsession, kwargs_processor
 from models.dynamo_client import DynamoDBClient
 from models.dynamodb import DynamoDB
@@ -36,6 +34,7 @@ def get_item_on_table(table_name, field, field_value):
         item = response['Item']
         print("Got the item successfully!")
         print(str(response))
+        return jsonify(item)
 
 def put_item_on_table(table_name, field, field_value):
     try:
