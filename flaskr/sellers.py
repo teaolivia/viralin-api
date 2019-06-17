@@ -3,7 +3,7 @@ from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
 )
-from flaskr import apis, login, dynamo, sellers, promotors, contents, decimalencoder
+from flaskr import apis, login, dynamo, sellers, promotors, contents, decimalencoder, dynamo_client
 from flask import Flask, Blueprint, jsonify, request, abort, make_response
 from flaskr.user import User
 from bson.objectid import ObjectId
@@ -58,20 +58,18 @@ class Sellers(User):
     # basic getter route
     @apis.route('/sellers/<seller_id>/n_promotors', methods=['GET'])
     def count_total_promotors(self, seller_id):
-        #return db.Promotors.count_documents({"seller_id": seller_id})
+        print(promotors.item_count)
         pass
 
     @apis.route('/sellers/<seller_id>', methods=['GET'])
     def get_sellers(seller_id):
-        result = table.query(
-            KeyConditionExpression=Key('username').eq(seller_id)
+        response = sellers.get_item(
+            Key={
+                'seller_id': seller_id
+            }
         )
-        response = {
-            "statusCode": 200,
-            "body": json.dumps(result['Items'],
-                            cls=decimalencoder.DecimalEncoder)
-        }
-        return response
+        item = response['Item']
+        return jsonify(item)
         # seller_documents = [doc for doc in db.Sellers.find({})]
         # return jsonify({'sellers': seller_documents})
 
@@ -82,14 +80,15 @@ class Sellers(User):
         return "return sellers username"
 
     @apis.route('/sellers/<seller_id>/promotors', methods=['GET'])
-    def get_sellers_promotors():
-        response = promotors.get_item(
+    def get_sellers_promotors(seller_id):
+        response = dynamo_client.get_item(
+            TableName='promotors',
             Key={
                 'seller_id': seller_id
             }
         )
         item = response['Item']
-        return item
+        return json.dump(item)
 
     @apis.route('/sellers/<seller_id>/contents', methods=['GET'])
     def get_sellers_contents():
@@ -99,7 +98,7 @@ class Sellers(User):
             }
         )
         item = response['Item']
-        return item
+        return json.dump(item)
 
     # counter which is displayed on dashboards
     @apis.route('/sellers/<seller_id>/total_active_contents', methods=['POST'])

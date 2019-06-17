@@ -18,13 +18,13 @@ class Promotors(User):
     def view_all():
         response = promotors.get_item(
                 Key = {
-                    'name': name
+                    'promo': name
                 }
             )
         item = response['Item']
         return jsonify(item)
 
-    @apis.route('/n_promotors', methods=['GET'])
+    @apis.route('/<seller_id>/n_promotors', methods=['GET'])
     def n_promotors():
         return json.dumps(promotors.item_count())
 
