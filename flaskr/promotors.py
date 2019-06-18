@@ -1,11 +1,12 @@
 #!flask/bin/python
 from flaskr.user import User
-from flaskr import apis, login, promotors, decimalencoder
+from flaskr import apis, login, promotors, decimalencoder, contentpromo
 from flask import Flask, jsonify, request, make_response
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
 )
+from boto3.dynamodb.conditions import Key, Attr
 import json
 import requests
 
@@ -14,19 +15,29 @@ class Promotors(User):
         self.__init__(self, username,password)
         self.id = promotor_id
 
-    @apis.route('/promotors', methods=['GET'])
-    def view_all():
-        response = promotors.get_item(
-                Key = {
-                    'promo': name
-                }
-            )
+    @apis.route('/<seller_id>/promotors', methods=['GET'])
+    def view_all(seller_id):
+        response = contentpromo.get_item(
+            Key = {
+                'seller_id': seller_id,
+            }
+        )
         item = response['Item']
-        return jsonify(item)
+        # for x in item:
 
-    @apis.route('/<seller_id>/n_promotors', methods=['GET'])
-    def n_promotors():
-        return json.dumps(promotors.item_count())
+        # response = table.scan(
+        #     FilterExpression=Attr('promotor_id').lt(27)
+        # )
+        # items = response['Items']
+        return jsonify(item['promotor_id'])
+
+    @apis.route('/<promotor_id>/n_promotors', methods=['GET'])
+    def n_promotors(promotor_id):
+        response = contentpromo.scan(
+            FilterExpression=Attr('promotor_id').eq(promotor_id)
+        )
+        item = response['Items']
+        return jsonify("%d" % item)
 
     @apis.route('/contents/request/<content_id>', methods=['POST'])
     def send_request(self, content_id):

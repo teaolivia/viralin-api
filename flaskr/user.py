@@ -5,15 +5,20 @@ from flask_jwt_extended import (
 from flaskr import apis, login, bcrypt, auth
 from flask import Flask, session, request, abort, make_response
 from models import models
+import datetime
 
 
 class User(object):
-    def __init__(self, username, password):
+    def __init__(self, strcode, username, password):
+        self.id = strcode + str(n)
         self.username = username
         self.password = self.password_to_hash(password)
     """
         Main common funtions and mechanisms
     """
+    # uploading profile picture
+    def upload_profile_picture(self, id):
+        pass
 
     # generate hash
     def password_to_hash(self, password):
@@ -22,6 +27,9 @@ class User(object):
     # verify hash
     def check_password(self, password) -> str:
         return check_password_hash(self.pw_hash, password)
+
+    # def generate_id(self, usertype, password):
+    #     return usertype.item_count()
 
     def log_in(self, username, password, table_name):
         if not request.is_json:
@@ -63,9 +71,35 @@ class User(object):
         user_id = payload['identity']
         return userid_table.get(user_id, None)
 
-    # uploading profile picture
-    def upload_profile_picture(self, id):
-        pass
+    @apis.route('/auth')
+    def is_login():
+        cur = request.authorization
+        if cur and cur.password == 'password':
+            return 'auth success <3'
+        return make_response('could not verify :(',
+                                401,
+                                {'try': 'again!'})
+
+    @apis.route("/api/get_token", methods=["POST"])
+    def get_token():
+        incoming = request.get_json()
+        user = User.get_user_with_email_and_password(incoming["email"], incoming["password"])
+        if user:
+            return jsonify(token=generate_token(user))
+        return jsonify(error=True), 403
+
+
+    @apis.route("/api/is_token_valid", methods=["POST"])
+    def is_token_valid():
+        incoming = request.get_json()
+        is_valid = verify_token(incoming["token"])
+
+        if is_valid:
+            return jsonify(token_is_valid=True)
+        else:
+            return jsonify(token_is_valid=False), 403
+
+
 
 ## Flask-JWT Config
 # apis.debug = True

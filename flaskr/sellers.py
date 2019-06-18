@@ -3,10 +3,11 @@ from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
 )
-from flaskr import apis, login, dynamo, sellers, promotors, contents, decimalencoder, dynamo_client
+from flaskr import apis, login, dynamo, sellers, contentpromo, promotors, contents, decimalencoder, dynamo_client
 from flask import Flask, Blueprint, jsonify, request, abort, make_response
 from flaskr.user import User
 from bson.objectid import ObjectId
+from boto3.dynamodb.conditions import Key, Attr
 import json
 import requests
 
@@ -14,10 +15,17 @@ import requests
 class Sellers(User):
     def __init__(self, id, username, password):
         User.__init__(self, username, password)
-        self.seller_id = id
+        self.seller_id = self.generate_id()
 
-    @apis.route('/sellers/login', methods=['POST'])
+    def generate_id(self):
+        n = sellers.item_count()
+        it = [int(s) for s in seller_id.split() if s.isdigit()]
+        return "seller" + str(it + 1)
+
+    @apis.route('/sellers/login', methods=['GET','POST'])
     def login():
+        if current_user.is_authenticated:
+            return redirect(url_for('index'))
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
         self.username = request.json.get('username', None)
@@ -54,41 +62,33 @@ class Sellers(User):
 
     def upload_profile_picture(self, seller_id):
         pass
-
+    
     # basic getter route
     @apis.route('/sellers/<seller_id>/n_promotors', methods=['GET'])
     def count_total_promotors(self, seller_id):
         print(promotors.item_count)
         pass
 
-    @apis.route('/sellers/<seller_id>', methods=['GET'])
-    def get_sellers(seller_id):
-        response = sellers.get_item(
-            Key={
-                'seller_id': seller_id
-            }
-        )
-        item = response['Item']
-        return jsonify(item)
-        # seller_documents = [doc for doc in db.Sellers.find({})]
-        # return jsonify({'sellers': seller_documents})
+    # @apis.route('/sellers/<seller_id>', methods=['GET'])
+    # def get_sellers(seller_id):
+    #     response = sellers.get_item(
+    #         Key={
+    #             'seller_id': seller_id
+    #         }
+    #     )
+    #     item = response['Item']
+    #     return jsonify(item)
 
-    @apis.route('/sellers/<seller_id>/<username>', methods=['GET'])
-    def get_sellers_username(username):
-        if username not in sellers:
-            return "404 Not Found"
-        return "return sellers username"
-
-    @apis.route('/sellers/<seller_id>/promotors', methods=['GET'])
-    def get_sellers_promotors(seller_id):
-        response = dynamo_client.get_item(
-            TableName='promotors',
-            Key={
-                'seller_id': seller_id
-            }
-        )
-        item = response['Item']
-        return json.dump(item)
+    # @apis.route('/sellers/<seller_id>/promotors', methods=['GET'])
+    # def get_sellers_promotors(seller_id):
+    #     response = dynamo_client.get_item(
+    #         TableName='promotors',
+    #         Key={
+    #             'seller_id': seller_id
+    #         }
+    #     )
+    #     item = response['Item']
+    #     return jsonify(item)
 
     @apis.route('/sellers/<seller_id>/contents', methods=['GET'])
     def get_sellers_contents():
@@ -98,30 +98,40 @@ class Sellers(User):
             }
         )
         item = response['Item']
-        return json.dump(item)
+        return jsonify(item)
 
     # counter which is displayed on dashboards
     @apis.route('/sellers/<seller_id>/total_active_contents', methods=['POST'])
     def count_active_contents(seller_id):
-        response = contents.get_item(
-            Key={
-                'seller_id': seller_id,
-                'status': True
-            }
+        response = contentpromo.scan(
+            FilterExpression=Attr('seller_id').eq(seller_id)
         )
-        item = response['Item']
-        return len(item)
+        seller = response['Item']
+        for s in seller:
+            contents = contents_id
+            result = contents.scan(
+                FilterExpression = Attr('content_id').eq(s['content_id']) & Attr('status').eq(True)
+            )
+        res = result['Item']
+        return len(res)
 
     # count contents from a seller_id
     @apis.route('/sellers/<seller_id>/total_contents', methods=['POST'])
     def count_total_contents(seller_id):
-        return jsonify(contents.item_count)
+        response = contentpromo.scan(
+            FilterExpression=Attr('seller_id').eq(seller_id)
+        )
+        item = response['Items'].decode('utf-8')
+        return jsonify(len(item))
 
     # count total referral
     @apis.route('/sellers/<seller_id>/total_referrals', methods=['POST'])
     def count_referrals(seller_id):
-        # return db.promotors.find({"seller_id": seller_id}).count()
-        pass
+        response = contentpromo.scan(
+            FilterExpression=Attr('seller_id').eq(seller_id)
+        )
+        item = response['Items'].decode('utf-8')
+        return jsonify(item)
 
     @apis.route('/sellers/<string:seller_id>/stats/', methods=['GET'])
     def view_stats(seller_id):

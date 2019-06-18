@@ -31,6 +31,7 @@ sellers = dynamo_resource.Table('sellers')
 promotors = dynamo_resource.Table('promotors')
 contents = dynamo_resource.Table('contents')
 contentpromo = dynamo_resource.Table('content-promotor')
+admins = dynamo_resource.Table('admin')
 
 ## flask-JWT-extended
 apis.debug = True

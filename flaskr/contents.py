@@ -2,6 +2,7 @@
 from flask import Flask, jsonify, request, abort, make_response, url_for
 from flaskr import apis, login, dynamo, decimalencoder
 from models import models
+from routes import get_content_through_seller_and_promotor
 import json
 import requests
 
@@ -20,7 +21,7 @@ class Contents(object):
         asset = request.form.get('asset',None)            
         rule = request.form.get('game_rule',None)
         content = {
-            'seller_id': request.json['seller_id'],
+            'content_id': request.json['seller_id'],
             '_id': _id[-1]['_id'] + 1,
             'title': request.json['title'],
             'status': True,
@@ -60,7 +61,15 @@ class Contents(object):
 
     @apis.route('/contents/<string:content_id>/share', methods=['POST'])
     def share_link(self, content_id) -> str:
-        return url_for('/<seller_id>/<content_id>')
+        item = get_content_through_seller_and_promotor(seller_id, promotor_id, content_id)
+        response = contents.get_item(
+            Key={
+                'content_id': seller_id,
+                'status': True
+            }
+        )
+        url = response['Item']
+        return jsonify(url)
 
     @apis.route('/contents/<string:content_id>/<string:promotor_id>', methods=['POST'])
     def respond_request(self, content_id, promotor_id):
